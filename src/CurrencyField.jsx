@@ -1,7 +1,8 @@
 'use strict';
 
 import React, {Component} from 'react';
-import TextField from 'material-ui/lib/text-field';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TextField from 'material-ui/TextField';
 
 class CurrencyField extends Component {
 
@@ -47,7 +48,6 @@ class CurrencyField extends Component {
 
     parseRawValue(displayedValue) {
         const value = displayedValue.replace(/[^0-9]/g, '');
-
         return parseFloat(value);
     }
 
@@ -106,32 +106,38 @@ class CurrencyField extends Component {
 
         const prefix = raw.slice(0, raw.length - precision);
         const sufix = raw.slice(raw.length - precision, raw.length);
-        return parseFloat(`${prefix}.${sufix}`);
+        return (parseFloat(`${prefix}.${sufix}`).toFixed(precision))/1;
     }
 
     render() {
         return (
+          <MuiThemeProvider>
             <TextField
                 {...this.props}
                 onChange={this.onInputType}
                 value={this.formatRawValue(this.state.rawValue)} />
+          </MuiThemeProvider>
         );
     }
 
 }
 
-CurrencyField.propTypes = {
-    id: React.PropTypes.string,
-    delimiter: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    precision: React.PropTypes.number,
-    separator: React.PropTypes.string,
-    unit: React.PropTypes.string,
-    value: React.PropTypes.number,
-    converter: React.PropTypes.func,
-};
+/**
+ * @deprecated
+ */
+// CurrencyField.propTypes = {
+//     id: React.PropTypes.string,
+//     delimiter: React.PropTypes.string,
+//     onChange: React.PropTypes.func,
+//     precision: React.PropTypes.number,
+//     separator: React.PropTypes.string,
+//     unit: React.PropTypes.string,
+//     value: React.PropTypes.number,
+//     converter: React.PropTypes.func,
+// };
 
 CurrencyField.defaultProps = {
+    id: 'currencyField-' + Math.random(),
     value: 0,
     precision: 2,
     separator: '.',

@@ -84,7 +84,7 @@
         "react/no-is-mounted": 2,
         "react/prefer-arrow-callback": 0,
         "react/prefer-es6-class": 0,
-        "react/prop-types": 2,
+        "react/prop-types": 0,
         "react/react-in-jsx-scope": 2,
         "react/require-extension": 2,
         "react/self-closing-comp": 2,
