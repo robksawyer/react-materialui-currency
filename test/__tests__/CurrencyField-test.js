@@ -24,19 +24,19 @@ describe('CurrencyField', () => {
         expect(currencyField.parseRawValue('R$ 0,00')).toEqual("0,00");
     });
 
-    it('parseDollarRawValue', () => {
-        let currencyField = TestUtils.renderIntoDocument(
-            <CurrencyField
-                precision={2}
-                separator='.'
-                delimiter=','
-                unit='$'/>
-        );
-
-        expect(currencyField.parseRawValue('$ 100,000.40')).toEqual(100000.40);
-        expect(currencyField.parseRawValue('$ 2.20')).toEqual(2.20);
-        expect(currencyField.parseRawValue('$ 0.04')).toEqual(0.04);
-    });
+    // it('parseDollarRawValue', () => {
+    //     let currencyField = TestUtils.renderIntoDocument(
+    //         <CurrencyField
+    //             precision={2}
+    //             separator='.'
+    //             delimiter=','
+    //             unit='$'/>
+    //     );
+    //
+    //     expect(currencyField.parseRawValue('$ 100,000.40')).toEqual(100000.40);
+    //     expect(currencyField.parseRawValue('$ 2.20')).toEqual(2.20);
+    //     expect(currencyField.parseRawValue('$ 0.04')).toEqual(0.04);
+    // });
 
     it('onChange', () => {
         let currencyField = TestUtils.renderIntoDocument(

@@ -58,7 +58,11 @@ export default class CurrencyField extends Component {
      */
      parseRawValue = (displayedValue) => {
          const value = displayedValue.replace(/[^0-9]/g, '');
-         return parseFloat(value);
+         if (this.props.separator === '.') {
+             return parseFloat(value);
+         } else {
+             return this.applyPrecisionToRawValue(value);
+         }
      }
 
     /**
