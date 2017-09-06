@@ -5,7 +5,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 
 class CurrencyField extends Component {
-
     constructor(props) {
         super(props);
         // this.onInputType = this.onChange.bind(this);
@@ -47,19 +46,18 @@ class CurrencyField extends Component {
     }
 
     parseRawValue = (displayedValue) => {
-        let values = displayedValue.split(this.props.separator);
+        const values = displayedValue.split(this.props.separator);
         // Replace the unit at the beginning of the value
-        values[0] = values[0].replace(this.props.unit,'').trim();
+        values[0] = values[0].replace(this.props.unit, '').trim();
 
         displayedValue = values.join(this.props.separator);
         const value = displayedValue.replace(/[^0-9]/g, '');
         // Handle formatting the number based on the precision.
-        if(this.props.precision > 0){
+        if (this.props.precision > 0) {
             return this.applyPrecisionToRawValue(value);
         } else {
             return parseFloat(value);
         }
-
     }
 
     /**
@@ -76,12 +74,12 @@ class CurrencyField extends Component {
             result = `${leftZeroPad}${result}`;
         }
 
-        let beforeSeparator = result.slice(0, result.length - this.props.precision);
+        const beforeSeparator = result.slice(0, result.length - this.props.precision);
         const afterSeparator = result.slice(result.length - this.props.precision);
 
         result = beforeSeparator + this.props.separator + afterSeparator;
 
-        if(this.props.separator === '.'){
+        if (this.props.separator === '.') {
             return parseFloat(result, this.props.precision);
         } else {
             return result;
@@ -143,21 +141,20 @@ class CurrencyField extends Component {
 
         const prefix = raw.slice(0, raw.length - precision);
         const sufix = raw.slice(raw.length - precision, raw.length);
-        return (parseFloat(`${prefix}.${sufix}`).toFixed(precision))/1;
+        return (parseFloat(`${prefix}.${sufix}`).toFixed(precision)) / 1;
     }
 
     render() {
-        const {id, value, precision, separator, delimiter, unit, onChange} = this.props;
+        const {id, onChange} = this.props;
         return (
-          <MuiThemeProvider>
-            <TextField
-                id={id}
-                onChange={onChange || this.onChange}
-                value={this.formatRawValue(this.state.rawValue)} />
-          </MuiThemeProvider>
+            <MuiThemeProvider>
+                <TextField
+                    id={id}
+                    onChange={onChange || this.onChange}
+                    value={this.formatRawValue(this.state.rawValue)} />
+            </MuiThemeProvider>
         );
     }
-
 }
 
 /**
