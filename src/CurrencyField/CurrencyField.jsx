@@ -22,7 +22,7 @@ export default class CurrencyField extends Component {
         }
     }
 
-    onChange = (event) => {
+    onInputType = (event) => {
         const input = event.target.value;
 
         let rawValue = this.parseRawValue(input);
@@ -146,7 +146,7 @@ export default class CurrencyField extends Component {
             <MuiThemeProvider>
                 <TextField
                     id={id}
-                    onChange={onChange || this.onChange}
+                    onChange={onChange || this.onInputType}
                     hintText={hintText}
                     underlineStyle={(underlineShow) ? {display: 'none'} : {}}
                     required={required}
