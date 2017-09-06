@@ -57,20 +57,13 @@ export default class CurrencyField extends Component {
     /**
      * parseRawValue
      */
-    parseRawValue = (displayedValue) => {
-        const values = displayedValue.split(this.props.separator);
-        // Replace the unit at the beginning of the value
-        values[0] = values[0].replace(this.props.unit, '').trim();
-
-        displayedValue = values.join(this.props.separator);
-        const value = displayedValue.replace(/[^0-9]/g, '');
-        // Handle formatting the number based on the precision.
-        if (this.props.precision > 0) {
-            return this.applyPrecisionToRawValue(value);
-        } else {
-            return parseFloat(value);
-        }
-    }
+     parseRawValue = (displayedValue) => {
+         let result = displayedValue;
+         result = this.removeOccurrences(result, this.props.delimiter);
+         result = this.removeOccurrences(result, this.props.separator);
+         result = this.removeOccurrences(result, this.props.unit);
+         return parseFloat(result);
+     }
 
     /**
      * applyPrecisionToRawValue
@@ -102,42 +95,42 @@ export default class CurrencyField extends Component {
     /**
      * formatRawValue
      */
-    formatRawValue = (rawValue) => {
-        const minChars = '0'.length + this.props.precision;
+     formatRawValue = (rawValue) => {
+         const minChars = '0'.length + this.props.precision;
 
-        let result = `${rawValue}`;
+         let result = `${rawValue}`;
 
-        if (result.length < minChars) {
-            const numbers = minChars - result.length;
-            const leftZeroPad = new String(0).repeat(numbers);
-            result = `${leftZeroPad}${result}`;
-        }
+         if (result.length < minChars) {
+             const numbers = minChars - result.length;
+             const leftZeroPad = new String(0).repeat(numbers);
+             result = `${leftZeroPad}${result}`;
+         }
 
-        let beforeSeparator = result.slice(0, result.length - this.props.precision);
-        const afterSeparator = result.slice(result.length - this.props.precision);
+         let beforeSeparator = result.slice(0, result.length - this.props.precision);
+         const afterSeparator = result.slice(result.length - this.props.precision);
 
-        if (beforeSeparator.length > 3) {
-            const chars = beforeSeparator.split('').reverse();
-            let withDots = '';
+         if (beforeSeparator.length > 3) {
+             const chars = beforeSeparator.split('').reverse();
+             let withDots = '';
 
-            for (let i = chars.length - 1; i >= 0; i--) {
-                const char = chars[i];
-                const dot = i % 3 === 0 ? this.props.delimiter : '';
-                withDots = `${withDots}${char}${dot}`;
-            }
+             for (let i = chars.length - 1; i >= 0; i--) {
+                 const char = chars[i];
+                 const dot = i % 3 === 0 ? this.props.delimiter : '';
+                 withDots = `${withDots}${char}${dot}`;
+             }
 
-            withDots = withDots.substring(0, withDots.length - 1);
-            beforeSeparator = withDots;
-        }
+             withDots = withDots.substring(0, withDots.length - 1);
+             beforeSeparator = withDots;
+         }
 
-        result = beforeSeparator + this.props.separator + afterSeparator;
+         result = beforeSeparator + this.props.separator + afterSeparator;
 
-        if (this.props.unit) {
-            result = `${this.props.unit} ${result}`;
-        }
+         if (this.props.unit) {
+             result = `${this.props.unit} ${result}`;
+         }
 
-        return result;
-    }
+         return result;
+     }
 
     /**
      * defaultConverter
@@ -178,20 +171,6 @@ export default class CurrencyField extends Component {
         );
     }
 }
-
-/**
- * @deprecated
- */
-// CurrencyField.propTypes = {
-//     id: React.PropTypes.string,
-//     delimiter: React.PropTypes.string,
-//     onChange: React.PropTypes.func,
-//     precision: React.PropTypes.number,
-//     separator: React.PropTypes.string,
-//     unit: React.PropTypes.string,
-//     value: React.PropTypes.number,
-//     converter: React.PropTypes.func,
-// };
 
 CurrencyField.defaultProps = {
     id: 'currencyField-' + Math.random(),
