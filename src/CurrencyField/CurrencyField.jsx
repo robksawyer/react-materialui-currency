@@ -8,10 +8,10 @@ class CurrencyField extends Component {
 
     constructor(props) {
         super(props);
-        this.onInputType = this.onInputType.bind(this);
-        this.formatRawValue = this.formatRawValue.bind(this);
-        this.parseRawValue = this.parseRawValue.bind(this);
-        this.defaultConverter = this.defaultConverter.bind(this);
+        // this.onInputType = this.onChange.bind(this);
+        // this.formatRawValue = this.formatRawValue.bind(this);
+        // this.parseRawValue = this.parseRawValue.bind(this);
+        // this.defaultConverter = this.defaultConverter.bind(this);
         this.state = {
             rawValue: this.props.value,
         };
@@ -27,7 +27,7 @@ class CurrencyField extends Component {
         }
     }
 
-    onInputType(event) {
+    onChange = (event) => {
         const input = event.target.value;
 
         let rawValue = this.parseRawValue(input);
@@ -46,12 +46,49 @@ class CurrencyField extends Component {
         this.props.onChange(converter(rawValue), display);
     }
 
-    parseRawValue(displayedValue) {
+    parseRawValue = (displayedValue) => {
+        let values = displayedValue.split(this.props.separator);
+        // Replace the unit at the beginning of the value
+        values[0] = values[0].replace(this.props.unit,'').trim();
+
+        displayedValue = values.join(this.props.separator);
         const value = displayedValue.replace(/[^0-9]/g, '');
-        return parseFloat(value);
+        // Handle formatting the number based on the precision.
+        if(this.props.precision > 0){
+            return this.applyPrecisionToRawValue(value);
+        } else {
+            return parseFloat(value);
+        }
+
     }
 
-    formatRawValue(rawValue) {
+    /**
+     * Handles applying the precision decimal to a raw value
+     */
+    applyPrecisionToRawValue = (rawValue) => {
+        const minChars = '0'.length + this.props.precision;
+
+        let result = `${rawValue}`;
+
+        if (result.length < minChars) {
+            const numbers = minChars - result.length;
+            const leftZeroPad = new String(0).repeat(numbers);
+            result = `${leftZeroPad}${result}`;
+        }
+
+        let beforeSeparator = result.slice(0, result.length - this.props.precision);
+        const afterSeparator = result.slice(result.length - this.props.precision);
+
+        result = beforeSeparator + this.props.separator + afterSeparator;
+
+        if(this.props.separator === '.'){
+            return parseFloat(result, this.props.precision);
+        } else {
+            return result;
+        }
+    }
+
+    formatRawValue = (rawValue) => {
         const minChars = '0'.length + this.props.precision;
 
         let result = `${rawValue}`;
@@ -88,7 +125,7 @@ class CurrencyField extends Component {
         return result;
     }
 
-    defaultConverter(val) {
+    defaultConverter = (val) => {
         const {precision} = this.props;
         const raw = val.toString();
 
@@ -110,11 +147,12 @@ class CurrencyField extends Component {
     }
 
     render() {
+        const {id, value, precision, separator, delimiter, unit, onChange} = this.props;
         return (
           <MuiThemeProvider>
             <TextField
-                {...this.props}
-                onChange={this.onInputType}
+                id={id}
+                onChange={onChange || this.onChange}
                 value={this.formatRawValue(this.state.rawValue)} />
           </MuiThemeProvider>
         );

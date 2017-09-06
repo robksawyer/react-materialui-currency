@@ -4,10 +4,10 @@
   "description": "Currency TextField for Material-UI",
   "main": "lib/index.js",
   "scripts": {
-    "build": "yarn run lint && yarn test && babel ./src --ignore *-test.js --out-dir ./lib",
+    "build": "yarn run lint && yarn test && babel ./src --ignore *-test.jsx --out-dir ./lib",
     "prebuild": "rimraf lib",
     "test": "jest",
-    "lint": "eslint --ext .js src && echo \"eslint: no lint errors\""
+    "lint": "eslint --ext .jsx src && echo \"eslint: no lint errors\""
   },
   "jest": {
     "unmockedModulePathPatterns": [
