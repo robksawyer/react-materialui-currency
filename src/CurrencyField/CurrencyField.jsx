@@ -146,7 +146,7 @@ export default class CurrencyField extends Component {
             <MuiThemeProvider>
                 <TextField
                     id={id}
-                    onChange={onChange || this.onInputType}
+                    onChange={this.onInputType}
                     hintText={hintText}
                     underlineStyle={(underlineShow) ? {display: 'none'} : {}}
                     required={required}
