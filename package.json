@@ -2,9 +2,9 @@
   "name": "react-materialui-currency",
   "version": "1.0.0",
   "description": "Currency TextField for Material-UI",
-  "main": "lib/index.js",
+  "main": "lib/CurrencyField/index.js",
   "scripts": {
-    "build": "yarn run lint && yarn test && babel ./src --ignore *-test.jsx --out-dir ./lib",
+    "build": "yarn run lint && yarn test && babel ./src --ignore *-test.js --out-dir ./lib",
     "prebuild": "rimraf lib",
     "test": "jest",
     "lint": "eslint --ext .jsx src && echo \"eslint: no lint errors\""
@@ -45,6 +45,7 @@
     "babel-jest": "^20.0.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-dev-warning": "^0.1.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-plugin-transform-react-constant-elements": "^6.23.0",
     "babel-plugin-transform-react-inline-elements": "^6.3.13",
     "babel-plugin-transform-react-remove-prop-types": "^0.2.2",

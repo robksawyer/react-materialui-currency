@@ -4,13 +4,9 @@ import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 
-class CurrencyField extends Component {
+export default class CurrencyField extends Component {
     constructor(props) {
         super(props);
-        // this.onInputType = this.onChange.bind(this);
-        // this.formatRawValue = this.formatRawValue.bind(this);
-        // this.parseRawValue = this.parseRawValue.bind(this);
-        // this.defaultConverter = this.defaultConverter.bind(this);
         this.state = {
             rawValue: this.props.value,
         };
@@ -180,5 +176,3 @@ CurrencyField.defaultProps = {
     unit: '',
     onChange: () => {},
 };
-
-export default CurrencyField;

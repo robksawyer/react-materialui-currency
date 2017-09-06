@@ -40,20 +40,22 @@ describe('CurrencyField', () => {
 
     it('onChange', () => {
         let currencyField = TestUtils.renderIntoDocument(
-            <CurrencyField
-                precision={2}
-                separator='.'
-                delimiter=','
-                unit='US$'
-                value={1000250}
-                onChange={(raw, display) => {
-                    expect(raw).toEqual(10002.50);
-                }}/>
+            <div>
+                <CurrencyField
+                    precision={2}
+                    separator='.'
+                    delimiter=','
+                    unit='US$'
+                    value={1000250}
+                    onChange={(raw, display) => {
+                        expect(raw).toEqual(10002.50);
+                    }}/>
+            </div>
         );
 
-        try{
+        try {
             TestUtils.Simulate.change(currencyField);
-        } catch(err){
+        } catch(err) {
             console.log(err);
         }
     });
