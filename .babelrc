@@ -1,7 +1,12 @@
 {
     "presets": ["es2015", "stage-1", "react"],
     "plugins": [
-        ["transform-react-jsx", "transform-replace-object-assign", "simple-assign"],
+        [
+            "transform-react-jsx",
+            "transform-replace-object-assign",
+            "simple-assign"
+        ],
+        "jsx-strip-ext",
         "transform-dev-warning"
     ]
 }

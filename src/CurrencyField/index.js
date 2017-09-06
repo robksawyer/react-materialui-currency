@@ -1,3 +1,3 @@
-import CurrencyField from './CurrencyField';
+import CurrencyField from './CurrencyField.jsx';
 
 export default CurrencyField;
