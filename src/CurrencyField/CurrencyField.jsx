@@ -12,20 +12,30 @@ export default class CurrencyField extends Component {
         };
     }
 
+    /**
+     * componentWillMount
+     */
     componentWillMount() {
         this.notifyParentWithRawValue(this.state.rawValue);
     }
 
+    /**
+     * componentWillReceiveProps
+     */
     componentWillReceiveProps(nextProps) {
         if (nextProps.value) {
             this.setState({rawValue: nextProps.value});
         }
     }
 
+    /**
+     * onInputType
+     */
     onInputType = (event) => {
         const input = event.target.value;
 
         let rawValue = this.parseRawValue(input);
+        console.log('rawValue: ' + rawValue);
         if (!rawValue) {
             rawValue = 0;
         }
@@ -35,12 +45,18 @@ export default class CurrencyField extends Component {
         this.setState({rawValue});
     }
 
+    /**
+     * notifyParentWithRawValue
+     */
     notifyParentWithRawValue(rawValue) {
         const display = this.formatRawValue(rawValue);
         const converter = this.props.converter || this.defaultConverter;
         this.props.onChange(converter(rawValue), display);
     }
 
+    /**
+     * parseRawValue
+     */
     parseRawValue = (displayedValue) => {
         const values = displayedValue.split(this.props.separator);
         // Replace the unit at the beginning of the value
@@ -57,6 +73,7 @@ export default class CurrencyField extends Component {
     }
 
     /**
+     * applyPrecisionToRawValue
      * Handles applying the precision decimal to a raw value
      */
     applyPrecisionToRawValue = (rawValue) => {
@@ -82,6 +99,9 @@ export default class CurrencyField extends Component {
         }
     }
 
+    /**
+     * formatRawValue
+     */
     formatRawValue = (rawValue) => {
         const minChars = '0'.length + this.props.precision;
 
@@ -119,6 +139,9 @@ export default class CurrencyField extends Component {
         return result;
     }
 
+    /**
+     * defaultConverter
+     */
     defaultConverter = (val) => {
         const {precision} = this.props;
         const raw = val.toString();
@@ -141,7 +164,7 @@ export default class CurrencyField extends Component {
     }
 
     render() {
-        const {id, onChange, hintText, underlineShow, required} = this.props;
+        const {id, hintText, underlineShow, required} = this.props;
         return (
             <MuiThemeProvider>
                 <TextField
