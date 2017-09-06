@@ -35,7 +35,6 @@ export default class CurrencyField extends Component {
         const input = event.target.value;
 
         let rawValue = this.parseRawValue(input);
-        console.log('rawValue: ' + rawValue);
         if (!rawValue) {
             rawValue = 0;
         }
@@ -58,11 +57,8 @@ export default class CurrencyField extends Component {
      * parseRawValue
      */
      parseRawValue = (displayedValue) => {
-         let result = displayedValue;
-         result = this.removeOccurrences(result, this.props.delimiter);
-         result = this.removeOccurrences(result, this.props.separator);
-         result = this.removeOccurrences(result, this.props.unit);
-         return parseFloat(result);
+         const value = displayedValue.replace(/[^0-9]/g, '');
+         return parseFloat(value);
      }
 
     /**
