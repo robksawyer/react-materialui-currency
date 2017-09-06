@@ -1,7 +1,6 @@
 .DS_Store
 bin/
 build/
-lib/
 node_modules/
 coverage/
 npm-debug.log
