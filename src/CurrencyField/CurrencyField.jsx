@@ -141,12 +141,15 @@ export default class CurrencyField extends Component {
     }
 
     render() {
-        const {id, onChange} = this.props;
+        const {id, onChange, hintText, underlineShow, required} = this.props;
         return (
             <MuiThemeProvider>
                 <TextField
                     id={id}
                     onChange={onChange || this.onChange}
+                    hintText={hintText}
+                    underlineStyle={(underlineShow) ? {display: 'none'} : {}}
+                    required={required}
                     value={this.formatRawValue(this.state.rawValue)} />
             </MuiThemeProvider>
         );
@@ -170,9 +173,12 @@ export default class CurrencyField extends Component {
 CurrencyField.defaultProps = {
     id: 'currencyField-' + Math.random(),
     value: 0,
+    hintText: '',
     precision: 2,
     separator: '.',
+    underlineShow: false,
     delimiter: ',',
+    required: false,
     unit: '',
     onChange: () => {},
 };
