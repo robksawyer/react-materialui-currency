@@ -1,6 +1,6 @@
 {
   "name": "react-materialui-currency",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Currency TextField for Material-UI",
   "main": "lib/CurrencyField/index.js",
   "scripts": {
@@ -34,9 +34,9 @@
   "homepage": "https://github.com/helderfarias/react-materialui-currency#readme",
   "peerDependencies": {
     "material-ui": "^0.19.0",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
-    "react-tap-event-plugin": "^0.2.2"
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0",
+    "react-tap-event-plugin": "^1.0.0 || ^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
