@@ -173,7 +173,7 @@ export default class CurrencyField extends Component {
 }
 
 CurrencyField.defaultProps = {
-    id: 'currencyField-' + Math.random(),
+    id: `currencyField-${Math.random()}`,
     value: 0,
     hintText: '',
     precision: 2,
