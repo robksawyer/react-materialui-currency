@@ -1,6 +1,6 @@
 {
   "name": "react-materialui-currency",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Currency TextField for Material-UI",
   "main": "lib/CurrencyField/index.js",
   "scripts": {
