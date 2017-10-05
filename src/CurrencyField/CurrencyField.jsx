@@ -1,9 +1,15 @@
+/**
+ * CurrencyField.jsx
+ *
+ * This component handles formatting currency values input into a Material UI Textfield.
+ */
 'use strict';
 
 import React, {Component} from 'react';
 // import {withStyles} from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 
 // const styles = (theme) => ({
 //     container: {
@@ -169,13 +175,15 @@ class CurrencyField extends Component {
     }
 
     render() {
-        const {id, hintText, underlineShow, required} = this.props;
+        const {id, label, helperText, placeholder, required} = this.props;
         return (
             <TextField
                 id={id}
                 onChange={this.onInputType}
-                hinttext={hintText}
-                underlinestyle={(underlineShow) ? {display: 'none'} : {}}
+                label={label}
+                helperText={helperText}
+                // underlinestyle={(underlineShow) ? {display: 'none'} : {}}
+                placeholder={placeholder}
                 required={required}
                 value={this.formatRawValue(this.state.rawValue)}
             />
@@ -184,12 +192,14 @@ class CurrencyField extends Component {
 }
 
 CurrencyField.defaultProps = {
-    id: `currencyField-${Math.random()}`,
+    id: `currencyField-${shortid.generate()}`,
     value: 0,
-    hintText: '',
+    label: '',
+    helperText: '',
+    placeholder: 0.00,
     precision: 2,
     separator: '.',
-    underlineShow: false,
+    // underlineShow: false,
     delimiter: ',',
     required: false,
     unit: '',
@@ -199,10 +209,12 @@ CurrencyField.defaultProps = {
 CurrencyField.propTypes = {
     id: PropTypes.string,
     value: PropTypes.number,
-    hintText: PropTypes.string,
+    label: PropTypes.string,
+    helperText: PropTypes.string,
+    placeholder: PropTypes.number,
     precision: PropTypes.number,
     separator: PropTypes.string,
-    underlineShow: PropTypes.bool,
+    // underlineShow: PropTypes.bool,
     delimiter: PropTypes.string,
     required: PropTypes.bool,
     unit: PropTypes.string,

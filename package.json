@@ -70,6 +70,7 @@
     "parse-float": "^0.1.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "shortid": "^2.2.8"
   }
 }
