@@ -68,6 +68,9 @@
     "jest": "^20.0.4",
     "material-ui": "^1.0.0-beta.13",
     "parse-float": "^0.1.1",
-    "prop-types": "^15.6.0"
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-polyfills": "^0.0.1"
   }
 }
