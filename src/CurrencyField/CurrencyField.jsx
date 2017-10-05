@@ -5,16 +5,16 @@ import {withStyles} from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import PropTypes from 'prop-types';
 
-const styles = (theme) => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-    },
-});
+// const styles = (theme) => ({
+//     container: {
+//         display: 'flex',
+//         flexWrap: 'wrap',
+//     },
+//     textField: {
+//         marginLeft: theme.spacing.unit,
+//         marginRight: theme.spacing.unit,
+//     },
+// });
 
 class CurrencyField extends Component {
     constructor(props) {
@@ -174,8 +174,8 @@ class CurrencyField extends Component {
             <TextField
                 id={id}
                 onChange={this.onInputType}
-                hintText={hintText}
-                underlineStyle={(underlineShow) ? {display: 'none'} : {}}
+                hinttext={hintText}
+                underlinestyle={(underlineShow) ? {display: 'none'} : {}}
                 required={required}
                 value={this.formatRawValue(this.state.rawValue)}
             />
@@ -209,4 +209,4 @@ CurrencyField.propTypes = {
     onChange: PropTypes.func,
 };
 
-export default withStyles(styles)(CurrencyField);
+export default CurrencyField;
