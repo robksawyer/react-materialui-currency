@@ -9,19 +9,18 @@ import TestUtils from 'react-dom/test-utils';
 import CurrencyField from '../../src/CurrencyField';
 
 describe('CurrencyField', () => {
-
     it('parseRawValue', () => {
-        let currencyField = TestUtils.renderIntoDocument(
+        const currencyField = TestUtils.renderIntoDocument(
             <CurrencyField
                 precision={2}
-                separator=','
-                delimiter='.'
-                unit='R$'/>
+                separator=","
+                delimiter="."
+                unit="R$" />
         );
 
-        expect(currencyField.parseRawValue('R$ 1.000,00')).toEqual("1000,00");
-        expect(currencyField.parseRawValue('R$ 2,20')).toEqual("2,20");
-        expect(currencyField.parseRawValue('R$ 0,00')).toEqual("0,00");
+        expect(currencyField.parseRawValue('R$ 1.000,00')).toEqual('1000,00');
+        expect(currencyField.parseRawValue('R$ 2,20')).toEqual('2,20');
+        expect(currencyField.parseRawValue('R$ 0,00')).toEqual('0,00');
     });
 
     // it('parseDollarRawValue', () => {
@@ -39,37 +38,37 @@ describe('CurrencyField', () => {
     // });
 
     it('onChange', () => {
-        let currencyField = TestUtils.renderIntoDocument(
+        const currencyField = TestUtils.renderIntoDocument(
             <div>
                 <CurrencyField
                     precision={2}
-                    separator='.'
-                    delimiter=','
-                    unit='US$'
+                    separator="."
+                    delimiter=","
+                    unit="US$"
                     value={1000250}
                     onChange={(raw, display) => {
                         expect(raw).toEqual(10002.50);
-                    }}/>
+                    }} />
             </div>
         );
 
         try {
             TestUtils.Simulate.change(currencyField);
-        } catch(err) {
+        } catch (err) {
             console.log(err);
         }
     });
 
     it('notifyParentWithRawValue empty', () => {
-        let currencyField = TestUtils.renderIntoDocument(
+        const currencyField = TestUtils.renderIntoDocument(
             <CurrencyField
                 precision={2}
-                separator='.'
-                delimiter=','
-                unit='US$'
+                separator="."
+                delimiter=","
+                unit="US$"
                 onChange={(raw, display) => {
                     expect(raw).toEqual(0);
-                }}/>
+                }} />
         );
 
         currencyField.notifyParentWithRawValue('');
@@ -79,13 +78,13 @@ describe('CurrencyField', () => {
         TestUtils.renderIntoDocument(
             <CurrencyField
                 precision={2}
-                separator='.'
-                delimiter=','
-                unit='US$'
+                separator="."
+                delimiter=","
+                unit="US$"
                 value={2010014}
                 onChange={(raw, display) => {
                     expect(raw).toEqual(20100.14);
-                }}/>
+                }} />
         );
 
         TestUtils.renderIntoDocument(
@@ -93,7 +92,7 @@ describe('CurrencyField', () => {
                 value={10}
                 onChange={(raw, display) => {
                     expect(raw).toEqual(10);
-                }}/>
+                }} />
         );
 
         TestUtils.renderIntoDocument(
@@ -101,7 +100,7 @@ describe('CurrencyField', () => {
                 value={100}
                 onChange={(raw, display) => {
                     expect(raw).toEqual(1);
-                }}/>
+                }} />
         );
 
         TestUtils.renderIntoDocument(
@@ -110,8 +109,7 @@ describe('CurrencyField', () => {
                 value={100}
                 onChange={(raw, display) => {
                     expect(raw).toEqual(10.00);
-                }}/>
+                }} />
         );
     });
-
 });
